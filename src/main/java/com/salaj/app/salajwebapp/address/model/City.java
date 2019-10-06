@@ -1,4 +1,4 @@
-package com.salaj.app.salajwebapp.seeder.model;
+package com.salaj.app.salajwebapp.address.model;
 
 import javax.persistence.*;
 
@@ -9,10 +9,11 @@ public class City {
     private static final long serialVersionUID = 454136713213455311L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private long id;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
 
     public long getId() {

@@ -1,9 +1,11 @@
 package com.salaj.app.salajwebapp.seeder;
 
+import com.salaj.app.salajwebapp.address.model.City;
+import com.salaj.app.salajwebapp.address.model.State;
 import com.salaj.app.salajwebapp.io.entity.UserEntity;
 import com.salaj.app.salajwebapp.io.repository.CityRepository;
+import com.salaj.app.salajwebapp.io.repository.StateRepository;
 import com.salaj.app.salajwebapp.io.repository.UserRepository;
-import com.salaj.app.salajwebapp.seeder.model.City;
 import com.salaj.app.salajwebapp.shared.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -24,6 +26,9 @@ public class DatabaseSeeder {
     private CityRepository cityRepository;
 
     @Autowired
+    private StateRepository stateRepository;
+
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -36,6 +41,7 @@ public class DatabaseSeeder {
     public void seed(ContextRefreshedEvent event) {
         seedUsersTable();
         seedCityTable();
+        seedStateTable();
     }
 
     private void seedUsersTable() {
@@ -64,6 +70,21 @@ public class DatabaseSeeder {
                 city = new City();
                 city.setName(cityName);
                 cityRepository.save(city);
+            }
+        }
+    }
+
+    private void seedStateTable() {
+
+        if (stateRepository.count() <= 0) {
+            String[] states = {"Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Goa", "Gujarat", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka",
+                                "Kerala","Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim",
+                                "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"};
+            State state;
+            for (String stateName : states){
+                state = new State();
+                state.setName(stateName);
+                stateRepository.save(state);
             }
         }
     }
