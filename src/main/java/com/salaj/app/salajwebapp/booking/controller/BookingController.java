@@ -1,12 +1,9 @@
 package com.salaj.app.salajwebapp.booking.controller;
 
-import com.salaj.app.salajwebapp.CustomException.BookingException;
 import com.salaj.app.salajwebapp.booking.model.BookedOrder;
 import com.salaj.app.salajwebapp.booking.service.BookingService;
 import com.salaj.app.salajwebapp.booking.service.RestaurantService;
-import com.salaj.app.salajwebapp.io.entity.UserEntity;
 import com.salaj.app.salajwebapp.io.repository.UserRepository;
-import com.salaj.app.salajwebapp.ui.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/v1/booking")
