@@ -159,6 +159,9 @@
 	</dependencies>
 
 	<build>
+		<filters>
+			<filter>src/main/resources/application.properties</filter>
+		</filters>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -175,18 +178,51 @@
 
     <profiles>
 		<profile>
-			<id>dev</id>
+			<id>local</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<build>
+				<filters>
+					<filter>src/main/resources/application-local.properties</filter>
+				</filters>
 				<plugins>
 					<plugin>
 						<groupId>org.springframework.boot</groupId>
 						<artifactId>spring-boot-maven-plugin</artifactId>
 						<configuration>
 							<profiles>
-								<profile>development</profile>
+								<profile>local</profile>
+								<configuration>
+									<source>${java.version}</source>
+									<target>${java.version}</target>
+									<compilerArgument>-Xlint:all</compilerArgument>
+									<showWarnings>true</showWarnings>
+									<showDeprecation>true</showDeprecation>
+								</configuration>
+							</profiles>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>openshift</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<filters>
+					<filter>src/main/resources/application-openshift.properties</filter>
+				</filters>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<configuration>
+							<profiles>
+								<profile>openshift</profile>
 								<configuration>
 									<source>${java.version}</source>
 									<target>${java.version}</target>
